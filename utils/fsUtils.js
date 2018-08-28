@@ -110,7 +110,7 @@ module.exports = {
                         return RNFetchBlob.fs.stat(tmpFile)
                             .then(fileStats => {
                                 // Verify if the content was fully downloaded!
-                                if (res.respInfo.headers['Content-Length'] && res.respInfo.headers['Content-Length'] != fileStats.size) {
+                                if (res.respInfo.headers['Content-Length'] && res.respInfo.headers['Content-Length'] < fileStats.size) {
                                     return Promise.reject();
                                 }
 
