@@ -108,15 +108,7 @@ module.exports = {
                         }
 
                         return RNFetchBlob.fs.stat(tmpFile)
-                            .then(fileStats => {
-                                // Verify if the content was fully downloaded!
-                                if (res.respInfo.headers['Content-Length'] && res.respInfo.headers['Content-Length'] < fileStats.size) {
-                                    return Promise.reject();
-                                }
-
-                                // the download is complete and rename the temporary file
-                                return fs.mv(tmpFile, toFile);
-                            });
+                            .then(() => fs.mv(tmpFile, toFile));
 
 
                     })
